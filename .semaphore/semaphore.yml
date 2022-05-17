@@ -35,11 +35,8 @@ blocks:
           commands:
             - cd martor_demo
             - python manage.py check --deploy
-after_pipeline:
-  task:
-    jobs:
-      - name: 'Job #1'
-        commands: []
 promotions:
-  - name: Add First Promotion
+  - name: Dockerize pipeline
     pipeline_file: pipeline_2.yml
+    auto_promote:
+      when: branch = 'master' AND result = 'passed'
